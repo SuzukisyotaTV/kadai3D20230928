@@ -12,7 +12,7 @@ void Main()
 	int  pls = false;
 	// ボール
 	Circle ball{ 400, 400, 8 };
-	Circle ball2{ 450, 400, 8 };
+	Circle ball2{ 500, 400, 8 };
 	// ブロックの配列
 	Array<Rect> bricks;
 	// 横 (Scene::Width() / blockSize.x) 個、縦 5 個のブロックを配列に追加する
@@ -61,7 +61,8 @@ void Main()
 		if (ball.y < 0 && ballVelocity.y < 0)
 		{
 			ballVelocity.y *= -1;
-		}	if (ball2.y < 0 && ballVelocity.y < 0)
+		}
+		if (ball2.y < 0 && ball2Velocity.y < 0)
 		{
 			ball2Velocity.y *= -1;
 		}
@@ -82,13 +83,13 @@ void Main()
 		{
 			// パドルの中心からの距離に応じてはね返る方向を変える
 			ballVelocity = Vec2{ (ball.x - paddle.center().x) * 10, -ballVelocity.y }.setLength(speed);
-			bardel -= 2;
+			bardel -= 3;
 		}
 		if (0 < ball2Velocity.y && paddle.intersects(ball2))
 		{
 			// パドルの中心からの距離に応じてはね返る方向を変える
 			ball2Velocity = Vec2{ (ball2.x - paddle.center().x) * 10, -ball2Velocity.y }.setLength(speed);
-			bardel -= 2;
+			bardel -= 3;
 		}
 		// すべてのブロックを描画する
 		for (const auto& brick : bricks)
